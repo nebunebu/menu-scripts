@@ -1,0 +1,44 @@
+#!/bin/env bash
+
+CLIENTS=$(\
+	hyprctl -j clients | jq -r\
+	'.[] |
+	select(.workspace.id > 0) |
+	(.workspace.id | tostring) 
+	+ " " +
+	.title 
+	+ " " + 
+	(.pid | tostring)
+	' |\
+	sort\
+)
+
+ACTIVE_WORKSPACE=$(\
+	hyprctl activeworkspace |\
+	head -n 1 |\
+	awk '{print $3}'\
+)
+
+LINES=$(wc -l <(echo -e "$CLIENTS"))
+
+SELECTION=$(\
+	echo -e "$CLIENTS" |\
+	sed 's/ [^ ]*$//'|\
+	fuzzel -d -p "󰻿 " -w 100 -l $LINES\
+)
+
+DEST=$(\
+	awk '{print $1}'\
+	<(echo -e "$SELECTION")\
+)
+
+[[ $ACTIVE_WORKSPACE -gt 5 && $DEST -le 5 ]] && hyprctl dispatch focusmonitor DP-1
+[[ $ACTIVE_WORKSPACE -le 5 && $DEST -gt 5 ]] && hyprctl dispatch focusmonitor DP-2
+
+hyprctl dispatch focuswindow pid:$(\
+	grep "$SELECTION"\
+	<(echo -e "$CLIENTS"\
+	) |\
+	awk '{print $NF}' |\
+	head -n 1\
+)
