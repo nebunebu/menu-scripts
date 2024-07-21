@@ -1,5 +1,9 @@
 # menu-scripts
 
+> [!CAUTION]
+> This repo is severely neglected
+> virtually none of the scripts work
+
 Small scripts, mostly written in Bash, using fuzzel as a launcher
 and for use on the hyprland compositor.
 
@@ -14,5 +18,5 @@ one.
 
 ## screen-capture
 
-Choose between taking screenshots and screen recordings of different 
+Choose between taking screenshots and screen recordings of different
 monitors and regions of monitors.
