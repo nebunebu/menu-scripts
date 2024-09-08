@@ -1,8 +1,21 @@
 # menu-scripts
 
-> [!CAUTION]
-> This repo is severely neglected
-> virtually none of the scripts work
+> [!Note]
+> An attempt to clean up these scripts
+
+> [!Note]
+> I am already second guessing this since I plan to move
+> away from using fuzzel
+
+## TODO
+
+- [ ] Dynamically identify monitors
+- [ ] pass script
+- [ ] buku script
+- [ ] cliphist script
+- [ ] screen capture with wf-recorder
+- [ ] put in flake and make scripts available with flake output
+- [ ] good oppurtunity to test out bash debugger in nvim
 
 Small scripts, mostly written in Bash, using fuzzel as a launcher
 and for use on the hyprland compositor.
